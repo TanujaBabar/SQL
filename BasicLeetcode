@@ -58,3 +58,53 @@ FROM
 Employees LEFT JOIN EmployeeUNI ON Employees.id = EmployeeUNI.id;
 
 
+
+Table: Product
+
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| product_id   | int     |
+| product_name | varchar |
++--------------+---------+
+Write a solution to report the product_name, year, and price for each sale_id in the Sales table.
+Return the resulting table in any order.
+
+The result format is in the following example.
+# Write your MySQL query statement below
+SELECT 
+product_name ,
+year  ,
+price 
+FROM Sales
+INNER JOIN Product ON Sales.product_id  = Product.product_id 
+
+
+
+Write a solution to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+Return the result table sorted in any order.
+The result format is in the following example.
+Table: Visits
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| visit_id    | int     |
+| customer_id | int     |
++-------------+---------+
++----------------+---------+
+| Column Name    | Type    |
++----------------+---------+
+| transaction_id | int     |
+| visit_id       | int     |
+| amount         | int     |
++----------------+---------+
+# Write your MySQL query statement below
+SELECT 
+V.customer_id ,
+COUNT(*) AS count_no_trans 
+FROM Visits AS V
+LEFT JOIN Transactions T 
+ON V.visit_id = T.visit_id
+WHERE T.transaction_id IS NULL
+GROUP BY customer_id;
